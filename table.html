@@ -1,0 +1,987 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="icon" type="image/png" href="/assests/scholarship-7617731_640.png">
+    <title>Admin Dashboard</title>
+    <style>
+        /* Styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .container {
+       
+            max-width: 900px;
+            margin: 20px auto;
+            background:rgb(252, 251, 251);
+            padding: 20px;
+            border-radius: 5px;
+            /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+        }
+        .container h3{
+            color:blue;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color:rgb(8, 59, 88);
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+            
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            color:white;
+            
+        }
+        th {
+            background-color:rgb(11, 63, 177);
+        }
+        .btn {
+            padding: 10px 15px;
+            margin: 10px 0;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .btn-add {
+            background-color: #28a745;
+        }
+        .btn-edit {
+            background-color: #ffc107;
+        }
+        .btn-delete {
+            background-color: #dc3545;
+        }
+        .btnall{
+            display:flex;
+            flex-direction:column;
+        }
+        .btn btn-d{
+            color:white;
+        }
+        /* Popup styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            width: 90%;
+            max-width: 500px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+            padding: 20px;
+        }
+        .popup.active {
+            display: block;
+        }
+        .popup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .popup-header h3 {
+            margin: 0;
+        }
+        .popup-close {
+            cursor: pointer;
+            color: red;
+            font-size: 18px;
+            font-weight: bold;
+            background: none;
+            border: none;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+        .overlay.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>Admin Dashboard</h3>
+
+        <!-- Add Question Button -->
+        <button class="btn btn-add" id="addQuestionBtn">Add Question</button>
+        <a href="adlogout.php"> <button class="btn btn-add" id="addQuestionBtn">Logout</button>
+        </a>
+        <!-- Popup and Overlay -->
+        <div class="overlay" id="popupOverlay"></div>
+        <div class="popup" id="popupForm">
+            <div class="popup-header">
+                <h3>Add Question</h3>
+                <button class="popup-close" id="closePopupBtn">&times;</button>
+            </div>
+            <iframe src="add_question.php" frameborder="0" style="width: 100%; height: 400px;"></iframe>
+        </div>
+
+        <!-- Registered Users Table -->
+        <h3>Registered Users</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Registered On</th>
+                    <th>Documents</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                                <tr>
+                        <td>1</td>
+                        <td>King Harrison </td>
+                        <td>king2000harrison@gmail.com</td>
+                        <td>08109222484</td>
+                        <td>No 11 IDU Road, James Izidor street </td>
+                        <td>2025-02-01 13:06:47</td>
+                        <td>
+                                                            <a href="uploads/1738411607_document1_IMG_20250130_155248_145~2.jpg" class="btn btn-d "  target="_blank">Document 1</a><br>
+                                                                                        <a href="uploads/1738411607_document2_IMG_20250130_155456_524~2.jpg"  class="btn btn-d " target="_blank">Document 2</a><br>
+                                                                                        <a href="uploads/1738411607_document3_IMG_20250130_154737_208~2.jpg"  class="btn btn-d " target="_blank">Document 3</a>
+                                                                                          <a href="uploads/1738411607_document4_IMG_20250130_154815_900~2.jpg"  class="btn btn-d " target="_blank">Document 4</a>
+                                                                                          <a href="uploads/1738411607_document5_Screenshot_20250201-125819_1.jpg"  class="btn btn-d " target="_blank">Document 5</a>
+                                                    </td>
+                        <td>
+                            <a href="delete_user.php?id=20" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>2</td>
+                        <td>Precious  Joseph </td>
+                        <td>josephinepreshy211@gmail.com</td>
+                        <td>09167547596</td>
+                        <td>No.1 Anama Oriji Street Oboburu </td>
+                        <td>2025-01-31 14:59:39</td>
+                        <td>
+                                                            <a href="uploads/1738331979_document1_IMG-20250131-WA0045.jpg" class="btn btn-d "  target="_blank">Document 1</a><br>
+                                                                                        <a href="uploads/1738331979_document2_IMG-20250131-WA0044.jpg"  class="btn btn-d " target="_blank">Document 2</a><br>
+                                                                                        <a href="uploads/1738331979_document3_IMG-20250129-WA0026.jpg"  class="btn btn-d " target="_blank">Document 3</a>
+                                                                                          <a href="uploads/1738331979_document4_IMG-20250129-WA0025.jpg"  class="btn btn-d " target="_blank">Document 4</a>
+                                                                                          <a href="uploads/1738331979_document5_Screenshot_20250131-143947.png"  class="btn btn-d " target="_blank">Document 5</a>
+                                                    </td>
+                        <td>
+                            <a href="delete_user.php?id=19" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>3</td>
+                        <td>Otakpo Obusor</td>
+                        <td>Otakpoobusor7@gmail.com</td>
+                        <td>09061325267</td>
+                        <td>No.9 Atata close</td>
+                        <td>2025-01-31 13:55:36</td>
+                        <td>
+                                                            <a href="uploads/1738328136_document1_62090541-fafd-4033-b71b-4f465a4a7e9d.jpeg" class="btn btn-d "  target="_blank">Document 1</a><br>
+                                                                                        <a href="uploads/1738328136_document2_IMG_2889.jpeg"  class="btn btn-d " target="_blank">Document 2</a><br>
+                                                                                        <a href="uploads/1738328136_document3_cae8d125-b1bb-428d-8722-e67d80976d2a.jpeg"  class="btn btn-d " target="_blank">Document 3</a>
+                                                                                          <a href="uploads/1738328136_document4_371e6bc9-3d39-4a26-93b0-1dfcc61c2504.jpeg"  class="btn btn-d " target="_blank">Document 4</a>
+                                                                                          <a href="uploads/1738328136_document5_5400d800-463d-41f4-91a4-f5fd61ba44de.jpeg"  class="btn btn-d " target="_blank">Document 5</a>
+                                                    </td>
+                        <td>
+                            <a href="delete_user.php?id=18" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>4</td>
+                        <td>SIMON GEORGE </td>
+                        <td>fortuntecsimon@gmail.com</td>
+                        <td>08089582552</td>
+                        <td>#13 Anama Oriji Street, Oboburu Town </td>
+                        <td>2025-01-31 12:10:42</td>
+                        <td>
+                                                            <a href="uploads/1738321842_document1_IMG-20250131-WA0002.jpg" class="btn btn-d "  target="_blank">Document 1</a><br>
+                                                                                        <a href="uploads/1738321842_document2_IMG-20250131-WA0003.jpg"  class="btn btn-d " target="_blank">Document 2</a><br>
+                                                                                        <a href="uploads/1738321842_document3_IMG-20250131-WA0001.jpg"  class="btn btn-d " target="_blank">Document 3</a>
+                                                                                          <a href="uploads/1738321842_document4_IMG-20250131-WA0004.jpg"  class="btn btn-d " target="_blank">Document 4</a>
+                                                                                          <a href="uploads/1738321842_document5_IMG-20250131-WA0000.jpg"  class="btn btn-d " target="_blank">Document 5</a>
+                                                    </td>
+                        <td>
+                            <a href="delete_user.php?id=17" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>5</td>
+                        <td>FAVOUR ISRAEL </td>
+                        <td>favourisrael800@gmail.com</td>
+                        <td>08134139261</td>
+                        <td>#8B Biseni Road Oboburu Town, Onelga Rivers State</td>
+                        <td>2025-01-30 21:16:10</td>
+                        <td>
+                                                            <a href="uploads/1738268170_document1_IMG-20250130-WA0002.jpg" class="btn btn-d "  target="_blank">Document 1</a><br>
+                                                                                        <a href="uploads/1738268170_document2_IMG-20250130-WA0000.jpg"  class="btn btn-d " target="_blank">Document 2</a><br>
+                                                                                        <a href="uploads/1738268170_document3_IMG-20250130-WA0003.jpg"  class="btn btn-d " target="_blank">Document 3</a>
+                                                                                          <a href="uploads/1738268170_document4_IMG-20250130-WA0001.jpg"  class="btn btn-d " target="_blank">Document 4</a>
+                                                                                          <a href="uploads/1738268170_document5_Screenshot_2025-01-30-21-02-05-889_com.google.android.apps.docs-edit.jpg"  class="btn btn-d " target="_blank">Document 5</a>
+                                                    </td>
+                        <td>
+                            <a href="delete_user.php?id=16" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>6</td>
+                        <td>Odinma Agburuga</td>
+                        <td>agburugaodinma@gmail.com</td>
+                        <td>07037095439</td>
+                        <td>No 10 mordant, iwofe, rumuolumeni, portharcourt.rivers State</td>
+                        <td>2025-01-30 19:08:57</td>
+                        <td>
+                                                            <a href="uploads/1738260535_document1_IMG_20250123_131730_204.jpg" class="btn btn-d "  target="_blank">Document 1</a><br>
+                                                                                        <a href="uploads/1738260536_document2_IMG_20241115_164842_123.jpg"  class="btn btn-d " target="_blank">Document 2</a><br>
+                                                                                        <a href="uploads/1738260536_document3_IMG_20250128_232550_965.jpg"  class="btn btn-d " target="_blank">Document 3</a>
+                                                                                          <a href="uploads/1738260536_document4_IMG_20250123_131705_865.jpg"  class="btn btn-d " target="_blank">Document 4</a>
+                                                                                          <a href="uploads/1738260537_document5_Screenshot_20250128-233529.png"  class="btn btn-d " target="_blank">Document 5</a>
+                                                    </td>
+                        <td>
+                            <a href="delete_user.php?id=15" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>7</td>
+                        <td>ARADU MESHACK</td>
+                        <td>meshackaradu@gmail.com</td>
+                        <td>08125300482</td>
+                        <td>26 Akabuka road, oboburu town, ONELGA, Rivers State</td>
+                        <td>2025-01-30 02:55:23</td>
+                        <td>
+                                                            <a href="uploads/1738202123_document1_passport.jpg" class="btn btn-d "  target="_blank">Document 1</a><br>
+                                                                                        <a href="uploads/1738202123_document2_mimi national ID.pdf"  class="btn btn-d " target="_blank">Document 2</a><br>
+                                                                                        <a href="uploads/1738202123_document3_lga identification.jpg"  class="btn btn-d " target="_blank">Document 3</a>
+                                                                                          <a href="uploads/1738202123_document4_Aradu_Meshack_Douglas_Admission_Letter.PDF"  class="btn btn-d " target="_blank">Document 4</a>
+                                                                                          <a href="uploads/1738202123_document5_gpa.JPG"  class="btn btn-d " target="_blank">Document 5</a>
+                                                    </td>
+                        <td>
+                            <a href="delete_user.php?id=9" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>8</td>
+                        <td>GIFT  ALLEN</td>
+                        <td>giftallen21@gmail.com</td>
+                        <td>07060578970</td>
+                        <td>No8 Amos street oboburu town, off onelga Rivers state.</td>
+                        <td>2025-01-29 08:28:55</td>
+                        <td>
+                                                            <a href="uploads/1738135735_document1_IMG_20250129_080952~2.jpg" class="btn btn-d "  target="_blank">Document 1</a><br>
+                                                                                        <a href="uploads/1738135735_document2_IMG_20250129_080840~2.jpg"  class="btn btn-d " target="_blank">Document 2</a><br>
+                                                                                        <a href="uploads/1738135735_document3_IMG_20250129_080809~2.jpg"  class="btn btn-d " target="_blank">Document 3</a>
+                                                                                          <a href="uploads/1738135735_document4_IMG_20250129_080827~2.jpg"  class="btn btn-d " target="_blank">Document 4</a>
+                                                                                          <a href="uploads/1738135735_document5_Allen_Gift_Chinedu_Result_Slip.PDF.pdf"  class="btn btn-d " target="_blank">Document 5</a>
+                                                    </td>
+                        <td>
+                            <a href="delete_user.php?id=7" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>9</td>
+                        <td>Edmond  Kingsley </td>
+                        <td>kingsleyedmond149@gmail.com</td>
+                        <td>08139091452</td>
+                        <td>Plot 6 road 3 today FM rumuikini Port Harcourt </td>
+                        <td>2025-01-29 06:15:11</td>
+                        <td>
+                                                            <a href="uploads/1738127711_document1_IMG_20241125_1927052(0).jpg" class="btn btn-d "  target="_blank">Document 1</a><br>
+                                                                                        <a href="uploads/1738127711_document2_IMG-20250116-WA0025.jpeg"  class="btn btn-d " target="_blank">Document 2</a><br>
+                                                                                        <a href="uploads/1738127711_document3_local gov..pdf"  class="btn btn-d " target="_blank">Document 3</a>
+                                                                                          <a href="uploads/1738127711_document4_admission CEA.pdf"  class="btn btn-d " target="_blank">Document 4</a>
+                                                                                          <a href="uploads/1738127711_document5_IMG-20241010-WA0012.jpg"  class="btn btn-d " target="_blank">Document 5</a>
+                                                    </td>
+                        <td>
+                            <a href="delete_user.php?id=5" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>10</td>
+                        <td>Harrison  Precious </td>
+                        <td>harrisonprecious2002@gmail.com</td>
+                        <td>08133679233 </td>
+                        <td>Choba, port Harcourt </td>
+                        <td>2025-01-29 05:34:20</td>
+                        <td>
+                                                            <a href="uploads/1738125260_document1_Passport.pdf" class="btn btn-d "  target="_blank">Document 1</a><br>
+                                                                                                                    <a href="uploads/1738125260_document3_IMG_20241026_165149.jpg"  class="btn btn-d " target="_blank">Document 3</a>
+                                                                                                                </td>
+                        <td>
+                            <a href="delete_user.php?id=4" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>11</td>
+                        <td>Okene Emmanuel </td>
+                        <td>okeneemmanuel738@gmail.com</td>
+                        <td>09034298464</td>
+                        <td>No 2 idu Road </td>
+                        <td>2025-01-29 01:16:15</td>
+                        <td>
+                                                            <a href="uploads/1738109775_document1_IMG_20250129_5153.jpg" class="btn btn-d "  target="_blank">Document 1</a><br>
+                                                                                        <a href="uploads/1738109775_document2_IMG_20250129_5826.jpg"  class="btn btn-d " target="_blank">Document 2</a><br>
+                                                                                        <a href="uploads/1738109775_document3_IMG_20250129_4336.jpg"  class="btn btn-d " target="_blank">Document 3</a>
+                                                                                          <a href="uploads/1738109775_document4_IMG_20250129_4620.jpg"  class="btn btn-d " target="_blank">Document 4</a>
+                                                                                          <a href="uploads/1738109775_document5_IMG_20250129_10321.jpg"  class="btn btn-d " target="_blank">Document 5</a>
+                                                    </td>
+                        <td>
+                            <a href="delete_user.php?id=3" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>12</td>
+                        <td>GLORY  MESSIAH </td>
+                        <td>glorymessiah98@gmail.com</td>
+                        <td>09161865950</td>
+                        <td>No 4 OKITE STREET OBOBURU TOWN ONELGA RIVERS STATE. </td>
+                        <td>2025-01-29 00:33:44</td>
+                        <td>
+                                                            <a href="uploads/1738107224_document1_IMG-20241212-WA0002.jpg" class="btn btn-d "  target="_blank">Document 1</a><br>
+                                                                                        <a href="uploads/1738107224_document2_IMG_20250129_000123_393~2.jpg"  class="btn btn-d " target="_blank">Document 2</a><br>
+                                                                                        <a href="uploads/1738107224_document3_IMG_20240807_065918_998~2.jpg"  class="btn btn-d " target="_blank">Document 3</a>
+                                                                                          <a href="uploads/1738107224_document4_IMG_20250115_161816_822~2.jpg"  class="btn btn-d " target="_blank">Document 4</a>
+                                                                                          <a href="uploads/1738107224_document5_IMG_20250115_161637_528~2.jpg"  class="btn btn-d " target="_blank">Document 5</a>
+                                                    </td>
+                        <td>
+                            <a href="delete_user.php?id=2" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>13</td>
+                        <td>AMOS  NKEMDIRIM </td>
+                        <td>nkemdirimamos622@gmail.com</td>
+                        <td>08126476504</td>
+                        <td>No 1 Amos street oboburu town </td>
+                        <td>2025-01-28 23:33:51</td>
+                        <td>
+                                                            <a href="uploads/1738103631_document1_IMG_20241027_075038.jpg" class="btn btn-d "  target="_blank">Document 1</a><br>
+                                                                                                                    <a href="uploads/1738103631_document3_IMG-20240214-WA0120.jpg"  class="btn btn-d " target="_blank">Document 3</a>
+                                                                                          <a href="uploads/1738103631_document4_IMG-20240214-WA0121.jpg"  class="btn btn-d " target="_blank">Document 4</a>
+                                                                                          <a href="uploads/1738103631_document5_Screenshot_20250125-160054.png"  class="btn btn-d " target="_blank">Document 5</a>
+                                                    </td>
+                        <td>
+                            <a href="delete_user.php?id=1" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+                        </td>
+                    </tr>
+                            </tbody>
+        </table>
+
+        <!-- Questions Table -->
+        <h3>Questions</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Question</th>
+                    <th>Answer A</th>
+                    <th>Answer B</th>
+                    <th>Answer C</th>
+                    <th>Answer D</th>
+                    <th>Correct Answer</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                                    <tr>
+                        <td>1</td>
+                        <td>The word in capital letter have the emphatic stress. Choose the option to which the given sentences relate. I bought my WIFE a red dress </td>
+                        <td>Did i buy my husband a red dress?</td>
+                        <td>Did he bought his daughter a red dress?</td>
+                        <td>Did i buy my wife a new dress?</td>
+                        <td>Did i buy my husband a red shoe?</td>
+                        <td>3</td>
+                        <td>
+                            <div class="btnall">
+                            <a href="edit_question.php?id=47" class="btn btn-edit">Edit</a>
+                            <a href="delete_question.php?id=47" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this question?');">Delete</a>
+                </div>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>2</td>
+                        <td>Choose the word that has the same rhyme scheme as the following word: &quot;Battle&quot;</td>
+                        <td>Raffle</td>
+                        <td>Latter</td>
+                        <td>Bitter</td>
+                        <td>Kettle</td>
+                        <td>4</td>
+                        <td>
+                            <div class="btnall">
+                            <a href="edit_question.php?id=46" class="btn btn-edit">Edit</a>
+                            <a href="delete_question.php?id=46" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this question?');">Delete</a>
+                </div>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>3</td>
+                        <td>The opposition to the free flow of electricity is known as electric ---------</td>
+                        <td>Capacitance</td>
+                        <td>Conductance</td>
+                        <td>Inductance</td>
+                        <td>Resistance</td>
+                        <td>4</td>
+                        <td>
+                            <div class="btnall">
+                            <a href="edit_question.php?id=45" class="btn btn-edit">Edit</a>
+                            <a href="delete_question.php?id=45" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this question?');">Delete</a>
+                </div>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>4</td>
+                        <td>Who is the author of &quot;Pride and prejudice&quot;?</td>
+                        <td>Charles Dickens</td>
+                        <td>Jane Austen</td>
+                        <td>Emily Bronte</td>
+                        <td>Mary Shelley</td>
+                        <td>2</td>
+                        <td>
+                            <div class="btnall">
+                            <a href="edit_question.php?id=44" class="btn btn-edit">Edit</a>
+                            <a href="delete_question.php?id=44" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this question?');">Delete</a>
+                </div>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>5</td>
+                        <td>Which play by William Shakespeare is set in the city of verona?</td>
+                        <td>Othello</td>
+                        <td>Hamlet</td>
+                        <td>Romeo and Juliet</td>
+                        <td>Macbeth</td>
+                        <td>3</td>
+                        <td>
+                            <div class="btnall">
+                            <a href="edit_question.php?id=43" class="btn btn-edit">Edit</a>
+                            <a href="delete_question.php?id=43" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this question?');">Delete</a>
+                </div>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>6</td>
+                        <td>What is the primary purpose of vaccination in animal husbandry?</td>
+                        <td>To increase egg production</td>
+                        <td>To prevent disease</td>
+                        <td>To improve meat quality</td>
+                        <td>To increase milk production</td>
+                        <td>2</td>
+                        <td>
+                            <div class="btnall">
+                            <a href="edit_question.php?id=42" class="btn btn-edit">Edit</a>
+                            <a href="delete_question.php?id=42" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this question?');">Delete</a>
+                </div>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>7</td>
+                        <td>Which of the following is a characteristic of a well-designed animal shelter</td>
+                        <td>Poor ventilation</td>
+                        <td>Inadequate space</td>
+                        <td>Easy cleaning and adequate space</td>
+                        <td>High temperature</td>
+                        <td>3</td>
+                        <td>
+                            <div class="btnall">
+                            <a href="edit_question.php?id=41" class="btn btn-edit">Edit</a>
+                            <a href="delete_question.php?id=41" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this question?');">Delete</a>
+                </div>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>8</td>
+                        <td>What is the term for the process of artificially inseminating animals?</td>
+                        <td>Embryo transfer</td>
+                        <td>Artificial insemination</td>
+                        <td>Natural mating</td>
+                        <td>Cross-breeding</td>
+                        <td>2</td>
+                        <td>
+                            <div class="btnall">
+                            <a href="edit_question.php?id=40" class="btn btn-edit">Edit</a>
+                            <a href="delete_question.php?id=40" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this question?');">Delete</a>
+                </div>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>9</td>
+                        <td>What is the term for the process of identifying and selecting animals for breeding based on their genetic characteristics?</td>
+                        <td>Selection</td>
+                        <td>Breeding</td>
+                        <td>Genetics</td>
+                        <td>Genomic selection</td>
+                        <td>4</td>
+                        <td>
+                            <div class="btnall">
+                            <a href="edit_question.php?id=39" class="btn btn-edit">Edit</a>
+                            <a href="delete_question.php?id=39" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this question?');">Delete</a>
+                </div>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>10</td>
+                        <td>What is a firewall?</td>
+                        <td>A type of antivirus software</td>
+                        <td>A type of malware</td>
+                        <td>A network security system</td>
+                        <td>A type of operating system</td>
+                        <td>3</td>
+                        <td>
+                            <div class="btnall">
+                            <a href="edit_question.php?id=38" class="btn btn-edit">Edit</a>
+                            <a href="delete_question.php?id=38" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this question?');">Delete</a>
+                </div>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>11</td>
+                        <td>What is the primary function of the keyboard?</td>
+                        <td>To display images</td>
+                        <td>To process data</td>
+                        <td>To provide power to the computer</td>
+                        <td>To input data</td>
+                        <td>4</td>
+                        <td>
+                            <div class="btnall">
+                            <a href="edit_question.php?id=37" class="btn btn-edit">Edit</a>
+                            <a href="delete_question.php?id=37" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this question?');">Delete</a>
+                </div>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>12</td>
+                        <td>What is a network?</td>
+                        <td>A group of computers connected together</td>
+                        <td>A type of computer software</td>
+                        <td>A type of computer hardware</td>
+                        <td>A type of computer virus</td>
+                        <td>1</td>
+                        <td>
+                            <div class="btnall">
+                            <a href="edit_question.php?id=36" class="btn btn-edit">Edit</a>
+                            <a href="delete_question.php?id=36" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this question?');">Delete</a>
+                </div>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>13</td>
+                        <td>What is the primary function of an operating system?</td>
+                        <td>To provide security for the computer</td>
+                        <td>To manage the computer&#039;s hardware and software resources</td>
+                        <td>To provide entertainment for the user</td>
+                        <td>To process data</td>
+                        <td>2</td>
+                        <td>
+                            <div class="btnall">
+                            <a href="edit_question.php?id=35" class="btn btn-edit">Edit</a>
+                            <a href="delete_question.php?id=35" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this question?');">Delete</a>
+                </div>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>14</td>
+                        <td>It was recently discovered that Mr Ojo has access to computer while, Mr Keyinde have no knowledge about computer. The term that best described the difference between the both of them is called. </td>
+                        <td>Computer literacy</td>
+                        <td>Computer illiteracy</td>
+                        <td>Computer knowledge</td>
+                        <td>Digital divide</td>
+                        <td>4</td>
+                        <td>
+                            <div class="btnall">
+                            <a href="edit_question.php?id=34" class="btn btn-edit">Edit</a>
+                            <a href="delete_question.php?id=34" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this question?');">Delete</a>
+                </div>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>15</td>
+                        <td>The 5th term of a GP is 32. If the common ratio is 2, find the first term.</td>
+                        <td>8</td>
+                        <td>16</td>
+                        <td>2</td>
+                        <td>4</td>
+                        <td>3</td>
+                        <td>
+                            <div class="btnall">
+                            <a href="edit_question.php?id=33" class="btn btn-edit">Edit</a>
+                            <a href="delete_question.php?id=33" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this question?');">Delete</a>
+                </div>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>16</td>
+                        <td>Find the 8th term of the GP: 2, 6, 18, 54,...</td>
+                        <td>1620</td>
+                        <td>1458</td>
+                        <td>1782</td>
+                        <td>1944</td>
+                        <td>2</td>
+                        <td>
+                            <div class="btnall">
+                            <a href="edit_question.php?id=32" class="btn btn-edit">Edit</a>
+                            <a href="delete_question.php?id=32" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this question?');">Delete</a>
+                </div>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>17</td>
+                        <td>If 1 + x:4x + 1 = 2:4, find the value of x.</td>
+                        <td>2</td>
+                        <td>1.5</td>
+                        <td>1</td>
+                        <td>0.5</td>
+                        <td>4</td>
+                        <td>
+                            <div class="btnall">
+                            <a href="edit_question.php?id=31" class="btn btn-edit">Edit</a>
+                            <a href="delete_question.php?id=31" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this question?');">Delete</a>
+                </div>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>18</td>
+                        <td>An AP has a first term of 2 and a common difference of 5. Find the 12th term. </td>
+                        <td>62</td>
+                        <td>57</td>
+                        <td>67</td>
+                        <td>72</td>
+                        <td>2</td>
+                        <td>
+                            <div class="btnall">
+                            <a href="edit_question.php?id=29" class="btn btn-edit">Edit</a>
+                            <a href="delete_question.php?id=29" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this question?');">Delete</a>
+                </div>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>19</td>
+                        <td>Find the sum of the first 5 terms of the GP: 2, 4, 8, 16......</td>
+                        <td>36</td>
+                        <td>30</td>
+                        <td>34</td>
+                        <td>32</td>
+                        <td>4</td>
+                        <td>
+                            <div class="btnall">
+                            <a href="edit_question.php?id=28" class="btn btn-edit">Edit</a>
+                            <a href="delete_question.php?id=28" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this question?');">Delete</a>
+                </div>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>20</td>
+                        <td>A tax on imports is called:</td>
+                        <td>Subsidy</td>
+                        <td>Embargo</td>
+                        <td>Tariff</td>
+                        <td>Quota</td>
+                        <td>3</td>
+                        <td>
+                            <div class="btnall">
+                            <a href="edit_question.php?id=27" class="btn btn-edit">Edit</a>
+                            <a href="delete_question.php?id=27" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this question?');">Delete</a>
+                </div>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>21</td>
+                        <td>Which of the acronyms best described the total value of all final goods and services produced within a country&#039;s borders in a given time period?  </td>
+                        <td>GNP</td>
+                        <td>GDP</td>
+                        <td>NI</td>
+                        <td>NDP</td>
+                        <td>2</td>
+                        <td>
+                            <div class="btnall">
+                            <a href="edit_question.php?id=26" class="btn btn-edit">Edit</a>
+                            <a href="delete_question.php?id=26" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this question?');">Delete</a>
+                </div>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>22</td>
+                        <td>What is the term for the price of giving up the next best alternative when making a decision?</td>
+                        <td>Opportunity cost</td>
+                        <td>Sunk cost</td>
+                        <td>Marginal cost</td>
+                        <td>Marginal benefit</td>
+                        <td>1</td>
+                        <td>
+                            <div class="btnall">
+                            <a href="edit_question.php?id=25" class="btn btn-edit">Edit</a>
+                            <a href="delete_question.php?id=25" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this question?');">Delete</a>
+                </div>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>23</td>
+                        <td>What is the term for a market structure in which many firms produce a differentiated product?</td>
+                        <td>Perfect competition</td>
+                        <td>Monopoly</td>
+                        <td>Sole proprietorship </td>
+                        <td>Oligopoly</td>
+                        <td>4</td>
+                        <td>
+                            <div class="btnall">
+                            <a href="edit_question.php?id=24" class="btn btn-edit">Edit</a>
+                            <a href="delete_question.php?id=24" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this question?');">Delete</a>
+                </div>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>24</td>
+                        <td>A person is looking a photograph of someone. His friend asks him, &quot;who is in the picture?&quot; The person replies, &quot;Brothers and sisters, I have none. But that man&#039;s father is my father&#039;s son.&quot; Who is in the picture?</td>
+                        <td>The man&#039;s father</td>
+                        <td>The person&#039;s son</td>
+                        <td>the person himself</td>
+                        <td>the person&#039;s brother</td>
+                        <td>2</td>
+                        <td>
+                            <div class="btnall">
+                            <a href="edit_question.php?id=23" class="btn btn-edit">Edit</a>
+                            <a href="delete_question.php?id=23" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this question?');">Delete</a>
+                </div>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>25</td>
+                        <td>if it is true that &quot;all cats are animals&quot; and &quot;some animals are mammals&quot;, what can be logically concluded?</td>
+                        <td>All cats are mammals</td>
+                        <td>Some cats are mammals</td>
+                        <td>No cats are mammals</td>
+                        <td>All mammals are cats</td>
+                        <td>2</td>
+                        <td>
+                            <div class="btnall">
+                            <a href="edit_question.php?id=22" class="btn btn-edit">Edit</a>
+                            <a href="delete_question.php?id=22" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this question?');">Delete</a>
+                </div>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>26</td>
+                        <td>A snail is at the bottom of a 20-foot well. Each day, it climbs up 3 feet, but at night, it slips back 2 feet. How many days will it take for the snail to reach the top of the well?</td>
+                        <td>18 days</td>
+                        <td>22 days</td>
+                        <td>20 days</td>
+                        <td>28 days</td>
+                        <td>3</td>
+                        <td>
+                            <div class="btnall">
+                            <a href="edit_question.php?id=21" class="btn btn-edit">Edit</a>
+                            <a href="delete_question.php?id=21" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this question?');">Delete</a>
+                </div>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>27</td>
+                        <td>A person is planning to build a fence around their rectangular garden. The garden measures 15m X 8m. If the person want to put the fence around the entire garden, how many meters of fencing will they need?</td>
+                        <td>90m</td>
+                        <td>23m</td>
+                        <td>46m</td>
+                        <td>7m</td>
+                        <td>3</td>
+                        <td>
+                            <div class="btnall">
+                            <a href="edit_question.php?id=20" class="btn btn-edit">Edit</a>
+                            <a href="delete_question.php?id=20" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this question?');">Delete</a>
+                </div>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>28</td>
+                        <td>A water tank can hold 1200 gallons of water. If 300 gallons of water are already in the tank, and 40 gallons of water are added per hour, how many hours will it take to fill the tank?</td>
+                        <td>12.5 hrs</td>
+                        <td>32.5 hrs</td>
+                        <td>10 hrs</td>
+                        <td>22.5 hrs</td>
+                        <td>4</td>
+                        <td>
+                            <div class="btnall">
+                            <a href="edit_question.php?id=19" class="btn btn-edit">Edit</a>
+                            <a href="delete_question.php?id=19" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this question?');">Delete</a>
+                </div>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>29</td>
+                        <td>A stone was thrown from point A. After moving freely in the air, it hit point B which is on the same range with the starting point. What is the total angle covered by the stone?   </td>
+                        <td>360 degree</td>
+                        <td>180 degree</td>
+                        <td>90 degree</td>
+                        <td>60 degree</td>
+                        <td>2</td>
+                        <td>
+                            <div class="btnall">
+                            <a href="edit_question.php?id=18" class="btn btn-edit">Edit</a>
+                            <a href="delete_question.php?id=18" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this question?');">Delete</a>
+                </div>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>30</td>
+                        <td>Which of the following words is nearest in meaning to the word &quot;vacillate?&quot;</td>
+                        <td>Accept</td>
+                        <td>Decide</td>
+                        <td>Hesitate</td>
+                        <td>Refuse</td>
+                        <td>3</td>
+                        <td>
+                            <div class="btnall">
+                            <a href="edit_question.php?id=17" class="btn btn-edit">Edit</a>
+                            <a href="delete_question.php?id=17" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this question?');">Delete</a>
+                </div>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>31</td>
+                        <td>Read the passage below and answer the question that follows:
+&quot;The company has been experiencing financial difficulties for several months. As a result\, the management has decided to reduce costs by laying off some employees.&quot;
+What is the main reason for the company&#039;s decision to lay off employees? </td>
+                        <td>To increase profits</td>
+                        <td>To improve employee</td>
+                        <td>To expand the business</td>
+                        <td>To reduce costs</td>
+                        <td>4</td>
+                        <td>
+                            <div class="btnall">
+                            <a href="edit_question.php?id=16" class="btn btn-edit">Edit</a>
+                            <a href="delete_question.php?id=16" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this question?');">Delete</a>
+                </div>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>32</td>
+                        <td>Read the passage and answer the question that follows:
+&quot;The new employee was very nervous on his first day of work. However, his co-workers were friendly and welcoming, which helped him to feel more at ease.&quot;
+What can be inferred about the new employee&#039;s co-workers?</td>
+                        <td>They were unfriendly and welcoming</td>
+                        <td>They were indifferent to the new employee</td>
+                        <td>They were welcoming and friendly to the new employee </td>
+                        <td>They were hostile towards the new employee </td>
+                        <td>3</td>
+                        <td>
+                            <div class="btnall">
+                            <a href="edit_question.php?id=15" class="btn btn-edit">Edit</a>
+                            <a href="delete_question.php?id=15" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this question?');">Delete</a>
+                </div>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>33</td>
+                        <td>Which of the following words is closest in meaning to the word &quot;perspicacious&quot;?</td>
+                        <td>Astute</td>
+                        <td>Oblivious</td>
+                        <td>Enthusiastic</td>
+                        <td>Reluctant</td>
+                        <td>1</td>
+                        <td>
+                            <div class="btnall">
+                            <a href="edit_question.php?id=14" class="btn btn-edit">Edit</a>
+                            <a href="delete_question.php?id=14" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this question?');">Delete</a>
+                </div>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>34</td>
+                        <td>What is the process by which the universe became the way it is today?</td>
+                        <td>Creation</td>
+                        <td>Big Bang</td>
+                        <td>Evolution</td>
+                        <td>Natural selection</td>
+                        <td>2</td>
+                        <td>
+                            <div class="btnall">
+                            <a href="edit_question.php?id=13" class="btn btn-edit">Edit</a>
+                            <a href="delete_question.php?id=13" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this question?');">Delete</a>
+                </div>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>35</td>
+                        <td>What is the main problem facing the city?</td>
+                        <td>Floods</td>
+                        <td>Drought</td>
+                        <td>Earthquakes</td>
+                        <td>Hurricanes</td>
+                        <td>2</td>
+                        <td>
+                            <div class="btnall">
+                            <a href="edit_question.php?id=12" class="btn btn-edit">Edit</a>
+                            <a href="delete_question.php?id=12" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this question?');">Delete</a>
+                </div>
+                        </td>
+                    </tr>
+                                    <tr>
+                        <td>36</td>
+                        <td>What is the value of x in the equation 2x + 5 = 11?</td>
+                        <td>5</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>3</td>
+                        <td>
+                            <div class="btnall">
+                            <a href="edit_question.php?id=11" class="btn btn-edit">Edit</a>
+                            <a href="delete_question.php?id=11" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this question?');">Delete</a>
+                </div>
+                        </td>
+                    </tr>
+                            </tbody>
+        </table>
+        <h3>Users Scores</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Scores</th>
+                    <th>Written On</th>
+                </tr>
+            </thead>
+            <tbody>
+                            </tbody>
+        </table>
+
+    </div>
+
+    <script>
+        // JavaScript for Popup
+        const addQuestionBtn = document.getElementById('addQuestionBtn');
+        const popupOverlay = document.getElementById('popupOverlay');
+        const popupForm = document.getElementById('popupForm');
+        const closePopupBtn = document.getElementById('closePopupBtn');
+
+        addQuestionBtn.addEventListener('click', () => {
+            popupOverlay.classList.add('active');
+            popupForm.classList.add('active');
+        });
+
+        closePopupBtn.addEventListener('click', () => {
+            popupOverlay.classList.remove('active');
+            popupForm.classList.remove('active');
+        });
+
+        popupOverlay.addEventListener('click', () => {
+            popupOverlay.classList.remove('active');
+            popupForm.classList.remove('active');
+        });
+    </script>
+</body>
+</html>
