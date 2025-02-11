@@ -16,6 +16,6 @@ try{
     echo "connection successful!";
 }
 catch(PDOEXCEPTION $e){
-    echo "Connections failed!" . $e->getMessage();
+    echo "Connection failed!" . $e->getMessage();
 }
 ?>
