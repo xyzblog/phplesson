@@ -1,6 +1,7 @@
 <?php
 // to retrieve  or fetchinformation from a table
-require 'createaccount.php';
+require 'createconnectionofdbtophp.php';
+// this the file that hold the data
 $sql = "SELECT * FROM users";
 $stmt = $conn->prepare($sql);
 // Execute the query
